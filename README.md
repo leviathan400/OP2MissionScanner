@@ -21,14 +21,14 @@ This scanner reads the first three. The detection rule for "is this a mission DL
 ### `PeExportReader`
 The only thing that touches DLL bytes. Walks the standard PE32 layout:
 
-1. DOS header at offset `0x3C` ? PE signature offset
+1. DOS header at offset `0x3C` - PE signature offset
 2. Verify `"PE\0\0"` magic
-3. COFF header ? require `IMAGE_FILE_DLL` (`characteristics & 0x2000`)
-4. Optional header ? require PE32 magic `0x10B` (32-bit)
-5. Data directory [0] ? Export Table RVA
-6. Section table ? map RVAs to file offsets
-7. Export directory ? name pointer table, ordinal table, export address table
-8. Build a `name ? RVA` lookup; expose `HasExport(name)` and `ReadExportString(name)`
+3. COFF header - require `IMAGE_FILE_DLL` (`characteristics & 0x2000`)
+4. Optional header - require PE32 magic `0x10B` (32-bit)
+5. Data directory [0] - Export Table RVA
+6. Section table - map RVAs to file offsets
+7. Export directory - name pointer table, ordinal table, export address table
+8. Build a `name - RVA` lookup; expose `HasExport(name)` and `ReadExportString(name)`
 
 
 
