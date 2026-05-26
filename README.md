@@ -1,5 +1,7 @@
 # OP2MissionScanner
 
+![Screenshot](https://images.outpostuniverse.org/OP2MissionScanner.png)
+
 A clean Windows GUI that lists Outpost 2 mission DLLs in a folder, showing each mission's map, tech tree, and level description.
 
 | DLL Name | Map Name | Techtree Name | Level Description |
@@ -7,14 +9,14 @@ A clean Windows GUI that lists Outpost 2 mission DLLs in a folder, showing each 
 | `mf4_hso.dll` | `survaxen.map` | `survtech.txt` | `4P, SRV, 'Forsaken World'` |
 | `mf4_06.dll` | `mp4_06.map` | `MULTITEK.TXT` | `4 Player, SpaceRace, 'BoreHole' map.` |
 | `e01.dll` | `eden01.map` | `EDENTEK.TXT` | `Eden Mission #1` |
-| … | … | … | … |
+| â€¦ | â€¦ | â€¦ | â€¦ |
 
 OP2 mission DLLs are 32-bit Windows PE files that publish their metadata via named exports. Every mission DLL exports four symbols:
 
-- `LevelDesc` — null-terminated string (the description shown to players)
-- `MapName` — null-terminated string (e.g. `mp4_06.map`)
-- `TechtreeName` — null-terminated string (e.g. `MULTITEK.TXT`)
-- `DescBlock` — a binary `AIModDesc` struct with mission type, player count, etc.
+- `LevelDesc` â€” null-terminated string (the description shown to players)
+- `MapName` â€” null-terminated string (e.g. `mp4_06.map`)
+- `TechtreeName` â€” null-terminated string (e.g. `MULTITEK.TXT`)
+- `DescBlock` â€” a binary `AIModDesc` struct with mission type, player count, etc.
 
 This scanner reads the first three. The detection rule for "is this a mission DLL?" is just: *does it export `LevelDesc`?* Other DLLs in an OP2 install (game code, helpers) don't, and are silently skipped.
 
@@ -33,8 +35,9 @@ The only thing that touches DLL bytes. Walks the standard PE32 layout:
 
 
 
-
 # MissionScannerGUI
+
+![Screenshot](https://images.outpostuniverse.org/OP2MissionScannerGUI.png)
 
 A Windows GUI front-end for the [`MissionScanner`](https://github.com/OutpostUniverse/MissionScanner) command-line tool. Launches the CLI, captures its stdout, and renders the results in a sortable grid.
 
